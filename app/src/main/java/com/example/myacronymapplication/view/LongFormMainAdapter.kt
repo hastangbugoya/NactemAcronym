@@ -1,6 +1,7 @@
 package com.example.myacronymapplication.view
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myacronymapplication.data.Lf
@@ -10,7 +11,8 @@ class LongFormMainAdapter : RecyclerView.Adapter<LongFormMainAdapter.LongFormMai
 
     var lfList: List<Lf> = listOf()
 
-    inner class LongFormMainViewHolder(binding: LongformItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class LongFormMainViewHolder(binding: LongformItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         var binding: LongformItemBinding = binding
     }
 
@@ -28,10 +30,21 @@ class LongFormMainAdapter : RecyclerView.Adapter<LongFormMainAdapter.LongFormMai
             sinceText.text = lfList.get(position).since?.let {
                 it.toString()
             }
+            val adapter = VariationLongFormAdapter()
+            varRecycler.adapter = adapter
+            lfList.get(position)?.vars?.let {
+                if (it.size > 1) {
+                    it.subList(1,it.size - 1)
+                    adapter.setVarList(it.subList(1,it.size - 1))
+                } else {
+                    varRecycler.visibility = View.GONE
+                }
+
+            }
         }
     }
 
-    fun setLFList(l : List<Lf>) {
+    fun setLFList(l: List<Lf>) {
         lfList = l
         notifyDataSetChanged()
     }

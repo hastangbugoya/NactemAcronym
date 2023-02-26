@@ -15,11 +15,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="textStart"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Long form"
-            android:paddingBottom="4dp"/>
+            android:paddingBottom="4dp"
+            android:fontFamily="@font/helvetica_bold"/>
 
         <TextView
             android:id="@+id/since_text"
@@ -28,6 +29,17 @@
             android:textAlignment="textStart"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/longform_text"
+            android:textSize="12sp"
             tools:text="9999" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/var_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/since_text"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            tools:listitem="@layout/variation_item"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
