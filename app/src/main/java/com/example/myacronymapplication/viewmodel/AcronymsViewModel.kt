@@ -26,7 +26,7 @@ class AcronymsViewModel : ViewModel() {
                 }
                 longFormList.value = listOf()
                 if (!response.isEmpty())
-                    longFormList.value = response.get(0)!!.lfs
+                    longFormList.value = response.get(0).lfs
                 toastCallback?.showToast("${longFormList.value?.size ?: 0} items found")
 
             } catch (e: Exception) {

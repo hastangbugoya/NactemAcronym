@@ -30,17 +30,17 @@ class LongFormMainAdapter : RecyclerView.Adapter<LongFormMainAdapter.LongFormMai
             sinceText.text = lfList.get(position).since?.let {
                 it.toString()
             }
-            val adapter = VariationLongFormAdapter()
-            varRecycler.adapter = adapter
-            lfList.get(position)?.vars?.let {
-                sinceText.text = it.size.toString()
-                if (it.size > 1) {
-                    adapter.setVarList(it.subList(1,it.size))
-                } else {
-                    varRecycler.visibility = View.GONE
-                }
-
-            }
+            varRecycler.visibility = View.GONE
+//            val adapter = VariationLongFormAdapter()
+//            varRecycler.adapter = adapter
+//            lfList.get(position).vars?.let {
+//                if (it.size > 1) {
+//                    adapter.setVarList(it.subList(1,it.size))
+//                } else {
+//                    varRecycler.visibility = View.GONE
+//                }
+//
+//            }
         }
     }
 
