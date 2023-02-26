@@ -18,5 +18,9 @@ class NactemRetofitTest {
             response = NactemRetofit.getService().getFullForm("ASP")
         }
         assert(!response.isEmpty())
+        runBlocking {
+            response = NactemRetofit.getService().getFullForm("")
+        }
+        assert(response.isEmpty())
     }
 }

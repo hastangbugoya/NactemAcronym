@@ -13,37 +13,32 @@ import kotlinx.coroutines.withContext
 
 
 class AcronymsViewModel : ViewModel() {
-    lateinit var toastCallback : ToastCallback
+    private var toastCallback: ToastCallback? = null
     var longFormList: MutableLiveData<List<Lf>> =
         MutableLiveData<List<Lf>>().apply { value = listOf() }
 
     fun getFullForm(sf: String) {
-        jLog("getFullForm--------------------")
         viewModelScope.launch {
             try {
                 // ensure IO is done on the IO thread
                 val response = withContext(Dispatchers.IO) {
                     NactemRetofit.getService().getFullForm(sf)
                 }
-                jLog("Reply List : $response")
-                if (!response.isEmpty()) {
-                    // successful!
-                    longFormList.value = response.get(0)?.lfs ?: listOf()
-                    toastCallback.showToast("${longFormList.value!!.size} items found")
-                    jLog("List : $response")
-                } else {
-                    longFormList.value = listOf()
-                    toastCallback.showToast("Zero items found")
-                }
+//                jLog("Reply List : $response")
+                longFormList.value = listOf()
+                if (!response.isEmpty())
+                    longFormList.value = response.get(0)!!.lfs
+                toastCallback?.showToast("${longFormList.value?.size ?: 0} items found")
+
             } catch (e: Exception) {
                 longFormList.value = listOf()
-                toastCallback.showToast("Exception encountered : $e")
+                toastCallback?.showToast("Exception encountered : $e")
             }
         }
     }
 
-    @JvmName("setToastCallback1")
-    fun setToastCallback(tcb : ToastCallback) {
+
+    fun setToastCallback(tcb: ToastCallback) {
         toastCallback = tcb
     }
 

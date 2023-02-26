@@ -22,16 +22,14 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
 
         val myLFAdapter = LongFormMainAdapter()
         binding.resultRecycler.adapter = myLFAdapter
-        val myViewModel : AcronymsViewModel by viewModels<AcronymsViewModel>()
+        val myViewModel: AcronymsViewModel by viewModels<AcronymsViewModel>()
         myViewModel.setToastCallback(this)
 
-        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         myViewModel.longFormList.observeForever() {
-            if (!it.isEmpty())
-                myLFAdapter.setLFList(it)
-            else
-                Toast.makeText(this,"No items found", Toast.LENGTH_LONG).show()
+            myLFAdapter.setLFList(it)
         }
 
         binding.submitButton.setOnClickListener {
@@ -39,11 +37,10 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
             myViewModel.getFullForm(binding.inputText.text.toString())
         }
 
-        myViewModel.getFullForm("ASAP")
     }
 
     override fun showToast(message: String) {
-        Toast.makeText(this,message,Toast.LENGTH_LONG).show()
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
 }
