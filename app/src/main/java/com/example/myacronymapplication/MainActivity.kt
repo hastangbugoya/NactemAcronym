@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
+
         val binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         val view = binding.root
         setContentView(view)
@@ -23,11 +23,15 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
         val myLFAdapter = LongFormMainAdapter()
         binding.resultRecycler.adapter = myLFAdapter
         val myViewModel : AcronymsViewModel by viewModels<AcronymsViewModel>()
+        myViewModel.setToastCallback(this)
 
         val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         myViewModel.longFormList.observeForever() {
-            myLFAdapter.setLFList(it)
+            if (!it.isEmpty())
+                myLFAdapter.setLFList(it)
+            else
+                Toast.makeText(this,"No items found", Toast.LENGTH_LONG).show()
         }
 
         binding.submitButton.setOnClickListener {

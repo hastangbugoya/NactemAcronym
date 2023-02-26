@@ -12,11 +12,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class AcronymsViewModel() : ViewModel() {
+class AcronymsViewModel : ViewModel() {
+    lateinit var toastCallback : ToastCallback
     var longFormList: MutableLiveData<List<Lf>> =
         MutableLiveData<List<Lf>>().apply { value = listOf() }
-    var exception = MutableLiveData<Exception?>().apply { value = null }
-    var error = MutableLiveData<String?>().apply { value = null }
 
     fun getFullForm(sf: String) {
         jLog("getFullForm--------------------")
@@ -30,20 +29,22 @@ class AcronymsViewModel() : ViewModel() {
                 if (!response.isEmpty()) {
                     // successful!
                     longFormList.value = response.get(0)?.lfs ?: listOf()
-                    exception.value = null
-                    error.value = null
+                    toastCallback.showToast("${longFormList.value!!.size} items found")
                     jLog("List : $response")
                 } else {
                     longFormList.value = listOf()
-                    error.value = "Zero results found"
+                    toastCallback.showToast("Zero items found")
                 }
             } catch (e: Exception) {
                 longFormList.value = listOf()
-                exception.value = e
-                error.value = e.toString()
-                jLog("Exception >>>>> " + e.toString())
+                toastCallback.showToast("Exception encountered : $e")
             }
         }
+    }
+
+    @JvmName("setToastCallback1")
+    fun setToastCallback(tcb : ToastCallback) {
+        toastCallback = tcb
     }
 
     interface ToastCallback {
