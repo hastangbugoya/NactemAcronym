@@ -13,13 +13,12 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
-        dubug {
-            buildConfigField "String", "BASEURL", "\"http://www.nactem.ac.uk/software/acromine/\""
+        debug {
+            buildConfigField "String", "MYBASEURL", "\"http://www.nactem.ac.uk/software/acromine/\""
         }
         release {
             minifyEnabled false

@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myacronymapplication.R
 import com.example.myacronymapplication.data.Lf
 import com.example.myacronymapplication.databinding.LongformItemBinding
+import android.content.Context
 
-class LongFormMainAdapter : RecyclerView.Adapter<LongFormMainAdapter.LongFormMainViewHolder>() {
+class LongFormMainAdapter(private var context: Context) : RecyclerView.Adapter<LongFormMainAdapter.LongFormMainViewHolder>() {
 
     private var lfList: List<Lf> = listOf()
 
@@ -25,11 +27,12 @@ class LongFormMainAdapter : RecyclerView.Adapter<LongFormMainAdapter.LongFormMai
     override fun onBindViewHolder(holder: LongFormMainViewHolder, position: Int) {
         holder.binding.apply {
             longformText.text = lfList[position].lf
-            sinceText.text = lfList[position].since.toString()
-            val adapter = VariationLongFormAdapter()
+            sinceText.text = context.getString(R.string.since_date_format, lfList[position].since.toString())
+            val adapter = VariationLongFormAdapter(context)
             varRecycler.adapter = adapter
             lfList[position].vars?.let {
                 if (it.size > 1) {
+                    // sublist is start-inclusive, end-exclusive
                     adapter.setVarList(it.subList(1,it.size))
                     varRecycler.visibility = View.VISIBLE
                 } else {

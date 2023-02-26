@@ -1,5 +1,7 @@
 package com.example.myacronymapplication.network
 
+
+import com.example.myacronymapplication.BuildConfig
 import com.example.myacronymapplication.data.NactemResponseItem
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -9,7 +11,7 @@ import retrofit2.http.Query
 class NactemRetofit {
 
     companion object {
-        fun buildRetrofitInstance() : Retrofit = Retrofit.Builder().baseUrl("http://www.nactem.ac.uk/software/acromine/")
+        fun buildRetrofitInstance() : Retrofit = Retrofit.Builder().baseUrl(BuildConfig.MYBASEURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         fun getService() : NactemService = buildRetrofitInstance().create(NactemService::class.java)

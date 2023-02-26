@@ -5,4 +5,6 @@
     <string name="input_area_for_acronym">input area for acronym</string>
     <string name="button_to_proceed_to_search">button to proceed to search</string>
     <string name="scrollable_list_of_search_results">scrollable list of search results</string>
+    <string name="since_date_format">since %s</string>
+    <string name="var_since_date_format">(%s)</string>
 </resources>

@@ -1,18 +1,18 @@
 package com.example.myacronymapplication.view
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myacronymapplication.R
 import com.example.myacronymapplication.data.Var
 import com.example.myacronymapplication.databinding.VariationItemBinding
 
-class VariationLongFormAdapter : RecyclerView.Adapter<VariationLongFormAdapter.VariationLongFormAdapterViewHolder>() {
+class VariationLongFormAdapter(private var context: Context) : RecyclerView.Adapter<VariationLongFormAdapter.VariationLongFormAdapterViewHolder>() {
 
-    var lfList: List<Var> = listOf()
+    private var lfList: List<Var> = listOf()
 
-    inner class VariationLongFormAdapterViewHolder(binding: VariationItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        var binding: VariationItemBinding = binding
-    }
+    inner class VariationLongFormAdapterViewHolder(var binding: VariationItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VariationLongFormAdapterViewHolder {
         val binding =
@@ -24,10 +24,8 @@ class VariationLongFormAdapter : RecyclerView.Adapter<VariationLongFormAdapter.V
 
     override fun onBindViewHolder(holder: VariationLongFormAdapterViewHolder, position: Int) {
         holder.binding.apply {
-            varLfText.text = lfList.get(position).lf
-            varSince.text = lfList.get(position).since?.let {
-                "(${it.toString()})"
-            }
+            varLfText.text = lfList[position].lf
+            varSince.text = context.getString(R.string.var_since_date_format, lfList[position].since.toString())
         }
     }
 

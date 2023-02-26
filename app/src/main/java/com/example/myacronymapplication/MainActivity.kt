@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
         val view = binding.root
         setContentView(view)
 
-        val myLFAdapter = LongFormMainAdapter()
+        val myLFAdapter = LongFormMainAdapter(this)
         binding.resultRecycler.adapter = myLFAdapter
 
         myViewModel.setToastCallback(this)
