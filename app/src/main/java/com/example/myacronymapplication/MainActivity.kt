@@ -4,14 +4,10 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.activity.viewModels
-import androidx.appcompat.content.res.AppCompatResources
 import com.example.myacronymapplication.databinding.ActivityMainBinding
 import com.example.myacronymapplication.view.AlertType
 import com.example.myacronymapplication.view.LongFormMainAdapter
@@ -58,13 +54,10 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
     }
 
     override fun showAlert(message: String, type: AlertType) {
-        val sb = Snackbar.make(binding.inputText, message, 5000)
-            .setBackgroundTint(
-                when (type) {
-                    AlertType.DEFAULT -> getColor(R.color.green_opaque)
-                    AlertType.ERROR -> getColor(R.color.red_opaque)
-                }
-            ).show()
+        Snackbar.make(binding.inputText, message, 5000)
+            .setBackgroundTint(getColor(type.brgb))
+            .setTextColor(getColor(type.frgb))
+            .show()
     }
 
     private fun searchResults(s: String, v: IBinder) {
