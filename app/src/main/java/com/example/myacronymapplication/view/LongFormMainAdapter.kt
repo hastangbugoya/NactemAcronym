@@ -8,7 +8,7 @@ import com.example.myacronymapplication.databinding.LongformItemBinding
 
 class LongFormMainAdapter : RecyclerView.Adapter<LongFormMainAdapter.LongFormMainViewHolder>() {
 
-    private var lfList: List<Lf> = listOf()
+    var lfList: List<Lf> = listOf()
 
     inner class LongFormMainViewHolder(binding: LongformItemBinding) : RecyclerView.ViewHolder(binding.root) {
         var binding: LongformItemBinding = binding
