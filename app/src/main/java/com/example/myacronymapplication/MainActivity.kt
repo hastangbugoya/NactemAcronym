@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
 
         binding.submitButton.setOnClickListener {
             inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+            myViewModel.getFullForm(binding.inputText.text.toString())
         }
 
         myViewModel.getFullForm("ASAP")
