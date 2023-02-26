@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 
 
 class AcronymsViewModel : ViewModel() {
-    private var toastCallback: ToastCallback? = null
+    var toastCallback: ToastCallback? = null
     var longFormList: MutableLiveData<List<Lf>> =
         MutableLiveData<List<Lf>>().apply { value = listOf() }
 
@@ -24,7 +24,6 @@ class AcronymsViewModel : ViewModel() {
                 val response = withContext(Dispatchers.IO) {
                     NactemRetofit.getService().getFullForm(sf)
                 }
-//                jLog("Reply List : $response")
                 longFormList.value = listOf()
                 if (!response.isEmpty())
                     longFormList.value = response.get(0)!!.lfs
@@ -38,6 +37,7 @@ class AcronymsViewModel : ViewModel() {
     }
 
 
+    @JvmName("setToastCallback1")
     fun setToastCallback(tcb: ToastCallback) {
         toastCallback = tcb
     }

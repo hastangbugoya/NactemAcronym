@@ -12,9 +12,7 @@ class NactemRetofit {
         fun buildRetrofitInstance() : Retrofit = Retrofit.Builder().baseUrl("http://www.nactem.ac.uk/software/acromine/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
         fun getService() : NactemService = buildRetrofitInstance().create(NactemService::class.java)
-
     }
 
 }
