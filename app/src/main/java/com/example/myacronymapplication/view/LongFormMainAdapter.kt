@@ -9,12 +9,10 @@ import com.example.myacronymapplication.databinding.LongformItemBinding
 
 class LongFormMainAdapter : RecyclerView.Adapter<LongFormMainAdapter.LongFormMainViewHolder>() {
 
-    var lfList: List<Lf> = listOf()
+    private var lfList: List<Lf> = listOf()
 
-    inner class LongFormMainViewHolder(binding: LongformItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        var binding: LongformItemBinding = binding
-    }
+    inner class LongFormMainViewHolder(var binding: LongformItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LongFormMainViewHolder {
         val binding =
@@ -26,16 +24,14 @@ class LongFormMainAdapter : RecyclerView.Adapter<LongFormMainAdapter.LongFormMai
 
     override fun onBindViewHolder(holder: LongFormMainViewHolder, position: Int) {
         holder.binding.apply {
-            longformText.text = lfList.get(position).lf
-            sinceText.text = lfList.get(position).since?.let {
-                it.toString()
-            }
-            varRecycler.visibility = View.VISIBLE
+            longformText.text = lfList[position].lf
+            sinceText.text = lfList[position].since.toString()
             val adapter = VariationLongFormAdapter()
             varRecycler.adapter = adapter
-            lfList.get(position).vars?.let {
+            lfList[position].vars?.let {
                 if (it.size > 1) {
                     adapter.setVarList(it.subList(1,it.size))
+                    varRecycler.visibility = View.VISIBLE
                 } else {
                     varRecycler.visibility = View.GONE
                 }

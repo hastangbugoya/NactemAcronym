@@ -3,9 +3,7 @@ package com.example.myacronymapplication.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myacronymapplication.data.Lf
 import com.example.myacronymapplication.data.Var
-import com.example.myacronymapplication.databinding.LongformItemBinding
 import com.example.myacronymapplication.databinding.VariationItemBinding
 
 class VariationLongFormAdapter : RecyclerView.Adapter<VariationLongFormAdapter.VariationLongFormAdapterViewHolder>() {
@@ -28,7 +26,7 @@ class VariationLongFormAdapter : RecyclerView.Adapter<VariationLongFormAdapter.V
         holder.binding.apply {
             varLfText.text = lfList.get(position).lf
             varSince.text = lfList.get(position).since?.let {
-                it.toString()
+                "(${it.toString()})"
             }
         }
     }

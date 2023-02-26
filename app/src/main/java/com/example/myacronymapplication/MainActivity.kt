@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -15,11 +14,11 @@ import com.example.myacronymapplication.view.LongFormMainAdapter
 import com.example.myacronymapplication.viewmodel.AcronymsViewModel
 
 class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
-    val myViewModel: AcronymsViewModel by viewModels<AcronymsViewModel>()
-    val binding : ActivityMainBinding by lazy  {
+    private val myViewModel: AcronymsViewModel by viewModels()
+    private val binding : ActivityMainBinding by lazy  {
         ActivityMainBinding.inflate(LayoutInflater.from(this))
     }
-    val inputMethodManager : InputMethodManager by lazy {
+    private val inputMethodManager : InputMethodManager by lazy {
         getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
@@ -34,17 +33,17 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
 
         myViewModel.setToastCallback(this)
 
-        myViewModel.longFormList.observeForever() {
+        myViewModel.longFormList.observeForever {
             myLFAdapter.setLFList(it)
         }
 
         binding.submitButton.setOnClickListener {
-            searchResults(binding.inputText.text.toString(), view.windowToken,0)
+            searchResults(binding.inputText.text.toString(), view.windowToken)
         }
 
         binding.inputText.setOnEditorActionListener  { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                searchResults(binding.inputText.text.toString(), view.windowToken,0)
+                searchResults(binding.inputText.text.toString(), view.windowToken)
                 true
             } else {
                 false
@@ -57,9 +56,9 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
-    fun searchResults(s : String, v : IBinder, f : Int) {
+    private fun searchResults(s : String, v : IBinder) {
         binding.inputText.setText(binding.inputText.text.toString().trim())
-        inputMethodManager.hideSoftInputFromWindow(v, f)
+        inputMethodManager.hideSoftInputFromWindow(v, 0)
         myViewModel.getFullForm(s)
     }
 
