@@ -33,9 +33,9 @@ class LongFormMainAdapter : RecyclerView.Adapter<LongFormMainAdapter.LongFormMai
             val adapter = VariationLongFormAdapter()
             varRecycler.adapter = adapter
             lfList.get(position)?.vars?.let {
+                sinceText.text = it.size.toString()
                 if (it.size > 1) {
-                    it.subList(1,it.size - 1)
-                    adapter.setVarList(it.subList(1,it.size - 1))
+                    adapter.setVarList(it.subList(1,it.size))
                 } else {
                     varRecycler.visibility = View.GONE
                 }

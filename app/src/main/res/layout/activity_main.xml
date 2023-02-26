@@ -14,6 +14,8 @@
         app:layout_constraintTop_toTopOf="@id/submit_button"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/submit_button"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:imeOptions="actionSearch"
         android:padding = "0dp"
         android:maxLines="1"
@@ -38,6 +40,7 @@
         app:layout_constraintTop_toBottomOf="@id/submit_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="4dp"
         tools:listitem="@layout/longform_item"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
