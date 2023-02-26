@@ -31,6 +31,15 @@
             app:layout_constraintTop_toBottomOf="@id/longform_text"
             android:textSize="12sp"
             tools:text="9999" />
+        <TextView
+            android:layout_width="0dp"
+            app:layout_constraintHorizontal_weight="0.8"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/since_text"
+            app:layout_constraintTop_toBottomOf="@id/since_text"
+            android:visibility="gone"
+            tools:text = "Var1\nVar2"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/var_recycler"
             android:layout_width="match_parent"
