@@ -8,7 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.viewbinding.BuildConfig
+import com.example.myacronymapplication.BuildConfig
 import com.example.myacronymapplication.databinding.ActivityMainBinding
 import com.example.myacronymapplication.data.AlertType
 import com.example.myacronymapplication.view.LongFormMainAdapter

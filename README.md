@@ -4,7 +4,7 @@
 2.	User is then presented with a list of corresponding meanings 
 
 •	Written in Native Android and Kotlin
-•	Uses MVVM architecture and View/Data binding (Databinding only links view to viewmodel observable)
+•	Uses MVVM architecture and View/Data binding
 •	Retrofit
 •	Basic testcases added
 •	Error cases
