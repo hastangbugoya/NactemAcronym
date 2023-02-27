@@ -22,9 +22,10 @@ class AcronymsViewModel : ViewModel() {
                 val response = withContext(Dispatchers.IO) {
                     NactemRetofit.getService().getFullForm(sf)
                 }
-                longFormList.value = listOf()
                 if (response.isNotEmpty())
                     longFormList.value = response[0].lfs
+                else
+                    longFormList.value = listOf()
                 toastCallback?.showAlert("${longFormList.value?.size ?: 0} items found", AlertType.DEFAULT)
             } catch (e: Exception) {
                 longFormList.value = listOf()
