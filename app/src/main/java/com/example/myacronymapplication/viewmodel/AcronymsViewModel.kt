@@ -18,7 +18,7 @@ class AcronymsViewModel(private var dispatcher: CoroutineDispatcher) : ViewModel
     var longFormList: MutableLiveData<List<Lf>> =
         MutableLiveData<List<Lf>>().apply { value = listOf() }
     @Bindable
-    var userInput = MutableLiveData<String>().apply { value = "Hello" }
+    var userInput = MutableLiveData<String>().apply { value = "" }
 
     fun getFullForm(sf: String) {
         viewModelScope.launch {
