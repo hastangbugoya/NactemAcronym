@@ -24,7 +24,9 @@ android {
             buildConfigField "String", "MYBASEURL", "\"http://www.nactem.ac.uk/software/acromine/\""
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            buildConfigField "String", "MYBASEURL", "\"http://www.nactem.ac.uk/software/acromine/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

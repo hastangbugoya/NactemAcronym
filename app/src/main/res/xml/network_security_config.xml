@@ -6,7 +6,10 @@
             <certificates src="system" />
         </trust-anchors>
     </base-config>
-    <domain-config cleartextTrafficPermitted="true">
+    <domain-config cleartextTrafficPermitted="true" if="debug">
         <domain includeSubdomains="true">www.nactem.ac.uk</domain>
     </domain-config>
+<!--    <domain-config cleartextTrafficPermitted="true" if="release">-->
+<!--        <domain includeSubdomains="true">www.nactem.ac.uk</domain>-->
+<!--    </domain-config>-->
 </network-security-config>
