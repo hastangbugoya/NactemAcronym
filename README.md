@@ -1,5 +1,4 @@
 # MyAcronymApplication
-<br /><br />
 •	User can enter an acronym or initialism<br />
 •	User is then presented with a list of corresponding meanings<br />
 <br />
