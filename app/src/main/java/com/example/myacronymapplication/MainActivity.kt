@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.viewbinding.BuildConfig
 import com.example.myacronymapplication.databinding.ActivityMainBinding
 import com.example.myacronymapplication.data.AlertType
 import com.example.myacronymapplication.view.LongFormMainAdapter
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
             if (BuildConfig.DEBUG)
                 binding.submitButton.setText(getString(R.string.search_string_format, myViewModel.userInput.value.toString()))
         }
+
     }
 
     override fun showAlert(message: String, type: AlertType) {
@@ -62,6 +64,11 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
 
     override fun hideTheKeyBoard() {
         inputMethodManager.hideSoftInputFromWindow(binding.root.windowToken, 0)
+    }
+
+    private fun searchResults(s: String) {
+        binding.inputText.setText(binding.inputText.text.toString().trim())
+        myViewModel.getFullForm(s)
     }
 
 }
