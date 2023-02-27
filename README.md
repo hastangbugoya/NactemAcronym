@@ -4,8 +4,9 @@
 2.	User is then presented with a list of corresponding meanings 
 
 •	Written in Native Android and Kotlin
-•	Uses MVVM architecture and Data binding
+•	Uses MVVM architecture and View/Data binding (Databinding only links view to viewmodel observable)
 •	Retrofit
 •	Basic testcases added
 •	Error cases
-•	RecyclerView for results (verical) and variation (horizontal)
+•	Limit non-encrypted API
+•	RecyclerView for results (vertical) and variation (horizontal)

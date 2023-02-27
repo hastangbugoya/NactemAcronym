@@ -7,4 +7,5 @@
     <string name="scrollable_list_of_search_results">scrollable list of search results</string>
     <string name="since_date_format">since %s</string>
     <string name="var_since_date_format">(%s)</string>
+    <string name="search_string_format">Search for %s</string>
 </resources>

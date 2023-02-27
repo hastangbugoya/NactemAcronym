@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.example.myacronymapplication.databinding.ActivityMainBinding
 import com.example.myacronymapplication.data.AlertType
 import com.example.myacronymapplication.view.LongFormMainAdapter
@@ -19,6 +21,9 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
 
     private val myViewModel: AcronymsViewModel by viewModels {
         AcronymsViewModelFactory(Dispatchers.IO)
+    }
+    private val databinding: ViewDataBinding by lazy {
+        DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(LayoutInflater.from(this))
@@ -37,19 +42,24 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
         binding.resultRecycler.adapter = myLFAdapter
 
         myViewModel.setToastCallback(this)
+        binding.dbAcronymsModel = myViewModel
 
         myViewModel.longFormList.observeForever {
             myLFAdapter.setLFList(it)
         }
 
+        myViewModel.userInput.observeForever {
+            binding.submitButton.setText(getString(R.string.search_string_format, myViewModel.userInput.value.toString()))
+        }
+
         binding.submitButton.setOnClickListener {
-            searchResults(binding.inputText.text.toString())
+            searchResults(myViewModel.userInput.value.toString())
             inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
         }
 
         binding.inputText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                searchResults(binding.inputText.text.toString())
+                searchResults(myViewModel.userInput.value.toString())
                 inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
                 true
             } else {

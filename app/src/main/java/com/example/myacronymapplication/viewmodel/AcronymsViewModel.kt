@@ -1,5 +1,7 @@
 package com.example.myacronymapplication.viewmodel
 
+import androidx.databinding.Bindable
+import androidx.databinding.Observable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,11 +12,13 @@ import com.example.myacronymapplication.data.AlertType
 import kotlinx.coroutines.*
 
 
-class AcronymsViewModel(private var dispatcher: CoroutineDispatcher) : ViewModel() {
+class AcronymsViewModel(private var dispatcher: CoroutineDispatcher) : ViewModel(), Observable {
 
     private var toastCallback: ToastCallback? = null
     var longFormList: MutableLiveData<List<Lf>> =
         MutableLiveData<List<Lf>>().apply { value = listOf() }
+    @Bindable
+    var userInput = MutableLiveData<String>().apply { value = "Hello" }
 
     fun getFullForm(sf: String) {
         viewModelScope.launch {
@@ -44,6 +48,14 @@ class AcronymsViewModel(private var dispatcher: CoroutineDispatcher) : ViewModel
 
     interface ToastCallback {
         fun showAlert(message: String, type : AlertType)
+    }
+
+    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
+
+    }
+
+    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
+
     }
 }
 
