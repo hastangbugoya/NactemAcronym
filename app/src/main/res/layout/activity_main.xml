@@ -22,7 +22,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:onClick="@{()->dbAcronymsModel.statSearch()}" />
-<!--        android:onClick="@{()->dbAcronymsModel.getFullForm(dbAcronymsModel.userInput)}"-->
 
         <EditText
             android:id="@+id/input_text"

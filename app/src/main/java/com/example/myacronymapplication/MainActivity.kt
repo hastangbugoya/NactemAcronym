@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
         databinding.inputText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 searchResults(myViewModel.userInput.value.toString())
-                hideTheKeyBoard()
                 true
             } else {
                 false
@@ -79,7 +78,6 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
     }
 
     private fun searchResults(s: String) {
-        databinding.inputText.setText(databinding.inputText.text.toString().trim())
         myViewModel.getFullForm(s)
     }
 
