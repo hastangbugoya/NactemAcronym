@@ -40,6 +40,10 @@ class AcronymsViewModel(private var dispatcher: CoroutineDispatcher) : ViewModel
         }
     }
 
+    fun statSearch() {
+        getFullForm(userInput.value.toString())
+        toastCallback?.hideTheKeyBoard()
+    }
 
     @JvmName("setToastCallback1")
     fun setToastCallback(tcb: ToastCallback) {
@@ -48,6 +52,7 @@ class AcronymsViewModel(private var dispatcher: CoroutineDispatcher) : ViewModel
 
     interface ToastCallback {
         fun showAlert(message: String, type : AlertType)
+        fun hideTheKeyBoard()
     }
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {

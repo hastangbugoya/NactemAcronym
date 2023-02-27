@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
@@ -49,24 +48,9 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
         }
 
         myViewModel.userInput.observeForever {
-            binding.submitButton.setText(getString(R.string.search_string_format, myViewModel.userInput.value.toString()))
+            if (BuildConfig.DEBUG)
+                binding.submitButton.setText(getString(R.string.search_string_format, myViewModel.userInput.value.toString()))
         }
-
-        binding.submitButton.setOnClickListener {
-            searchResults(myViewModel.userInput.value.toString())
-            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-        }
-
-        binding.inputText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                searchResults(myViewModel.userInput.value.toString())
-                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-                true
-            } else {
-                false
-            }
-        }
-
     }
 
     override fun showAlert(message: String, type: AlertType) {
@@ -76,9 +60,8 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
             .show()
     }
 
-    private fun searchResults(s: String) {
-        binding.inputText.setText(binding.inputText.text.toString().trim())
-        myViewModel.getFullForm(s)
+    override fun hideTheKeyBoard() {
+        inputMethodManager.hideSoftInputFromWindow(binding.root.windowToken, 0)
     }
 
 }
