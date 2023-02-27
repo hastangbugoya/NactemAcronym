@@ -1,4 +1,4 @@
-package com.example.myacronymapplication.view
+package com.example.myacronymapplication.data
 
 import com.example.myacronymapplication.R
 /**

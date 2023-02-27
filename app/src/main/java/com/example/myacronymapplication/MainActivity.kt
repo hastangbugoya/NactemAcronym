@@ -8,7 +8,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import com.example.myacronymapplication.databinding.ActivityMainBinding
-import com.example.myacronymapplication.view.AlertType
+import com.example.myacronymapplication.data.AlertType
 import com.example.myacronymapplication.view.LongFormMainAdapter
 import com.example.myacronymapplication.viewmodel.AcronymsViewModel
 import com.google.android.material.snackbar.Snackbar

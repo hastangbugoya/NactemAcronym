@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myacronymapplication.data.Lf
 import com.example.myacronymapplication.network.NactemRetofit
 import com.example.myacronymapplication.utility.Logger.jLog
-import com.example.myacronymapplication.view.AlertType
+import com.example.myacronymapplication.data.AlertType
 import kotlinx.coroutines.*
 
 
