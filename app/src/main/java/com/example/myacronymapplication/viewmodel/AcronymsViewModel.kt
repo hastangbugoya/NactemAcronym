@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myacronymapplication.data.Lf
 import com.example.myacronymapplication.network.NactemRetofit
+import com.example.myacronymapplication.utility.Logger.jLog
 import com.example.myacronymapplication.view.AlertType
 import kotlinx.coroutines.*
 
@@ -27,6 +28,7 @@ class AcronymsViewModel : ViewModel() {
                 toastCallback?.showAlert("${longFormList.value?.size ?: 0} items found", AlertType.DEFAULT)
             } catch (e: Exception) {
                 longFormList.value = listOf()
+                jLog(e.toString())
                 toastCallback?.showAlert("Exception encountered : $e", AlertType.ERROR)
             }
         }

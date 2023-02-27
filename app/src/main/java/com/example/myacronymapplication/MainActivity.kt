@@ -3,7 +3,6 @@ package com.example.myacronymapplication
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -39,12 +38,14 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
         }
 
         binding.submitButton.setOnClickListener {
-            searchResults(binding.inputText.text.toString(), view.windowToken)
+            searchResults(binding.inputText.text.toString())
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
         }
 
         binding.inputText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                searchResults(binding.inputText.text.toString(), view.windowToken)
+                searchResults(binding.inputText.text.toString())
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
                 true
             } else {
                 false
@@ -55,14 +56,13 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
 
     override fun showAlert(message: String, type: AlertType) {
         Snackbar.make(binding.inputText, message, 5000)
-            .setBackgroundTint(getColor(type.brgb))
-            .setTextColor(getColor(type.frgb))
+            .setBackgroundTint(getColor(type.bgColor))
+            .setTextColor(getColor(type.fgColor))
             .show()
     }
 
-    private fun searchResults(s: String, v: IBinder) {
+    private fun searchResults(s: String) {
         binding.inputText.setText(binding.inputText.text.toString().trim())
-        inputMethodManager.hideSoftInputFromWindow(v, 0)
         myViewModel.getFullForm(s)
     }
 
