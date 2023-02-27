@@ -10,7 +10,8 @@ import com.example.myacronymapplication.data.AlertType
 import kotlinx.coroutines.*
 
 
-class AcronymsViewModel : ViewModel() {
+class AcronymsViewModel(private var dispatcher: CoroutineDispatcher) : ViewModel() {
+
     private var toastCallback: ToastCallback? = null
     var longFormList: MutableLiveData<List<Lf>> =
         MutableLiveData<List<Lf>>().apply { value = listOf() }
@@ -19,7 +20,7 @@ class AcronymsViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 // ensure IO is done on the IO thread
-                val response = withContext(Dispatchers.IO) {
+                val response = withContext(dispatcher) {
                     NactemRetofit.getService().getFullForm(sf)
                 }
                 if (response.isNotEmpty())

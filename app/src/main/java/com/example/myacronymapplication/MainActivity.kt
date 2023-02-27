@@ -11,10 +11,15 @@ import com.example.myacronymapplication.databinding.ActivityMainBinding
 import com.example.myacronymapplication.data.AlertType
 import com.example.myacronymapplication.view.LongFormMainAdapter
 import com.example.myacronymapplication.viewmodel.AcronymsViewModel
+import com.example.myacronymapplication.viewmodel.AcronymsViewModelFactory
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
 
 class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
-    private val myViewModel: AcronymsViewModel by viewModels()
+
+    private val myViewModel: AcronymsViewModel by viewModels {
+        AcronymsViewModelFactory(Dispatchers.IO)
+    }
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(LayoutInflater.from(this))
     }

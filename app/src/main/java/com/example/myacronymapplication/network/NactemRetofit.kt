@@ -16,7 +16,6 @@ class NactemRetofit {
             .build()
         fun getService() : NactemService = buildRetrofitInstance().create(NactemService::class.java)
     }
-
 }
 
 interface NactemService {
