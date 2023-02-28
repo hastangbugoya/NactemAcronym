@@ -8,13 +8,19 @@ import com.example.myacronymapplication.R
 import com.example.myacronymapplication.data.Lf
 import com.example.myacronymapplication.databinding.LongformItemBinding
 import android.content.Context
+import com.example.myacronymapplication.data.Var
 
 class LongFormMainAdapter(private var context: Context) : RecyclerView.Adapter<LongFormMainAdapter.LongFormMainViewHolder>() {
 
     private var lfList: List<Lf> = listOf()
 
     inner class LongFormMainViewHolder(var binding: LongformItemBinding) :
-        RecyclerView.ViewHolder(binding.root)
+        RecyclerView.ViewHolder(binding.root) {
+            fun bind(item: Lf) {
+                binding.lf = item
+                binding.executePendingBindings()
+            }
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LongFormMainViewHolder {
         val binding =
@@ -26,8 +32,7 @@ class LongFormMainAdapter(private var context: Context) : RecyclerView.Adapter<L
 
     override fun onBindViewHolder(holder: LongFormMainViewHolder, position: Int) {
         holder.binding.apply {
-            longformText.text = lfList[position].lf
-            sinceText.text = context.getString(R.string.since_date_format, lfList[position].since.toString())
+            holder.bind(lfList[position])
             val adapter = VariationLongFormAdapter(context)
             varRecycler.adapter = adapter
             lfList[position].vars?.let {
@@ -38,7 +43,6 @@ class LongFormMainAdapter(private var context: Context) : RecyclerView.Adapter<L
                 } else {
                     varRecycler.visibility = View.GONE
                 }
-
             }
         }
     }

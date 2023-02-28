@@ -12,7 +12,7 @@ class VariationLongFormAdapter(private var context: Context) : RecyclerView.Adap
 
     private var lfList: List<Var> = listOf()
 
-    inner class VariationLongFormAdapterViewHolder(var binding: VariationItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class VariationLongFormAdapterViewHolder(var binding: VariationItemBinding) : RecyclerView.ViewHolder(binding.root) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VariationLongFormAdapterViewHolder {
         val binding =

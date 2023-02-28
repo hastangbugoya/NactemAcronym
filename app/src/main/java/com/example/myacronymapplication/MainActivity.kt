@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
         super.onCreate(savedInstanceState)
 
         val myLFAdapter = LongFormMainAdapter(this)
-
         databinding.resultRecycler.adapter = myLFAdapter
 
         myViewModel.setToastCallback(this)
