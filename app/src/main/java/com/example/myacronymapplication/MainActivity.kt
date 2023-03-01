@@ -15,7 +15,7 @@ import com.example.myacronymapplication.viewmodel.AcronymsViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 
-class MainActivity : AppCompatActivity(), AcronymsViewModel.ToastCallback {
+class MainActivity : AppCompatActivity(), AcronymsViewModel.UIUpdates {
 
     private val myViewModel: AcronymsViewModel by viewModels {
         AcronymsViewModelFactory(Dispatchers.IO)

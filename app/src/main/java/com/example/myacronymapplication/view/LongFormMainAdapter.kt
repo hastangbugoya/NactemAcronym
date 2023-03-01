@@ -4,11 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myacronymapplication.R
 import com.example.myacronymapplication.data.Lf
 import com.example.myacronymapplication.databinding.LongformItemBinding
 import android.content.Context
-import com.example.myacronymapplication.data.Var
 
 class LongFormMainAdapter(private var context: Context) : RecyclerView.Adapter<LongFormMainAdapter.LongFormMainViewHolder>() {
 
