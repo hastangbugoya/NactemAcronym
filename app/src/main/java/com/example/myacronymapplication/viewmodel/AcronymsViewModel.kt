@@ -1,5 +1,6 @@
 package com.example.myacronymapplication.viewmodel
 
+import android.view.inputmethod.EditorInfo
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.lifecycle.MutableLiveData
@@ -45,9 +46,17 @@ class AcronymsViewModel(private var dispatcher: CoroutineDispatcher) : ViewModel
         }
     }
 
-    fun statSearch() {
+    fun startSearch() {
         getFullForm(userInput.value.toString())
         interfaceImplementation?.hideTheKeyBoard()
+    }
+
+    fun onAcronymEditTextAction(actionId: Int) : Boolean {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+            startSearch()
+            return true
+        }
+        return false
     }
 
     @JvmName("setToastCallback1")

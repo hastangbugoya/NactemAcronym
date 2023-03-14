@@ -53,14 +53,14 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.UIUpdates {
         }
 
         //this is to just for onscreen keyboard
-        databinding.inputText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                searchResults(myViewModel.userInput.value.toString())
-                true
-            } else {
-                false
-            }
-        }
+//        databinding.inputText.setOnEditorActionListener { _, actionId, _ ->
+//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                searchResults(myViewModel.userInput.value.toString())
+//                true
+//            } else {
+//                false
+//            }
+//        }
 
 
     }

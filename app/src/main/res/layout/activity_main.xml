@@ -22,7 +22,7 @@
             android:text="@string/search_button_text"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:onClick="@{()->dbAcronymsModel.statSearch()}" />
+            android:onClick="@{()->dbAcronymsModel.startSearch()}" />
 
         <EditText
             android:id="@+id/input_text"
@@ -41,7 +41,8 @@
             app:layout_constraintBottom_toBottomOf="@id/submit_button"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/submit_button"
-            app:layout_constraintTop_toTopOf="@id/submit_button" />
+            app:layout_constraintTop_toTopOf="@id/submit_button"
+            android:onEditorAction="@{(v, actionId, event) -> dbAcronymsModel.onAcronymEditTextAction(actionId)}"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/result_recycler"
