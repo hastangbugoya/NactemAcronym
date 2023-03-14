@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="acronym_input_hint">Acrónimo</string>
+    <string name="search_button_text">Buscar</string>
+    <string name="input_area_for_acronym">entrada para el acrónimo</string>
+    <string name="button_to_proceed_to_search">botón para proceder a la búsqueda</string>
+    <string name="scrollable_list_of_search_results">lista desplazable de resultados de búsqueda</string>
+    <string name="since_date_format">desde %s</string>
+    <string name="var_since_date_format">(%s)</string>
+    <string name="search_string_format">Buscar %s</string>
+</resources>

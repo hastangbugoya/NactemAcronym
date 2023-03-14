@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.UIUpdates {
         databinding.dbAcronymsModel = myViewModel
 
         myViewModel.longFormList.observeForever {
-            myLFAdapter.setLFList(it)
+            myLFAdapter.setLFList(it.sortedBy { it.lf?.uppercase() })
         }
 
         myViewModel.userInput.observeForever {
