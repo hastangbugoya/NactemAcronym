@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MyAcronymApplication</string>
+    <string name="app_name" translatable="false">Nactem Acronyms</string>
     <string name="acronym_input_hint">Acronym</string>
     <string name="search_button_text">Search</string>
     <string name="input_area_for_acronym">input area for acronym</string>

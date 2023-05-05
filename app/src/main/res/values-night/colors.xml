@@ -7,5 +7,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="green_transparent">#0D7DB300</color>
-    <color name="green_opaque">#B5D372</color>
-    <color name="red_opaque">#D64D4D</color></resources>
+    <color name="default_alert_opaque">#B5D372</color>
+    <color name="error_alert_opaque">#D64D4D</color></resources>

@@ -25,24 +25,27 @@ class AcronymsViewModel(private var dispatcher: CoroutineDispatcher) : ViewModel
     var userInput = MutableLiveData<String>().apply { value = "" }
 
     fun getFullForm(searchString: String) {
-        viewModelScope.launch {
-            try {
-                // ensure IO is done on the IO thread
-                val response = withContext(dispatcher) {
-                    NactemRetofit.getService().getFullForm(searchString)
-                }
-                if (response.isNotEmpty())
-                    longFormList.value = response[0].lfs
-                else
+        if ((userInput.value?.trim()?.length ?: 0) > 0)
+            viewModelScope.launch {
+                try {
+                    // ensure IO is done on the IO thread
+                    val response = withContext(dispatcher) {
+                        NactemRetofit.getService().getFullForm(searchString)
+                    }
+                    if (response.isNotEmpty())
+                        longFormList.value = response[0].lfs
+                    else
+                        longFormList.value = listOf()
+                    interfaceImplementation?.showAlert("${longFormList.value?.size ?: 0} items found", AlertType.DEFAULT)
+                } catch (e: Exception) {
                     longFormList.value = listOf()
-                interfaceImplementation?.showAlert("${longFormList.value?.size ?: 0} items found", AlertType.DEFAULT)
-            } catch (e: Exception) {
-                longFormList.value = listOf()
-                val formattedDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
-                    .format(Date(System.currentTimeMillis()))
-                jLog("$searchString : $formattedDate : ${e.toString()}")
-                interfaceImplementation?.showAlert("Exception encountered : $e", AlertType.ERROR)
-            }
+                    val formattedDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+                        .format(Date(System.currentTimeMillis()))
+                    jLog("$searchString : $formattedDate : ${e.toString()}")
+                    interfaceImplementation?.showAlert("Exception encountered : $e", AlertType.ERROR)
+                }
+        } else {
+            interfaceImplementation?.showAlert("Acronym cannot be blank", AlertType.ERROR)
         }
     }
 
