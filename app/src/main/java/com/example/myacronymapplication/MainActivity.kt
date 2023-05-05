@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.UIUpdates {
             myLFAdapter.setLFList(it.sortedBy { it.lf?.uppercase() })
         }
 
+
     }
 
     override fun showAlert(message: String, type: AlertType) {
