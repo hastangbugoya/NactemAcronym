@@ -3,7 +3,6 @@ package com.example.myacronymapplication
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
@@ -11,15 +10,11 @@ import com.example.myacronymapplication.databinding.ActivityMainBinding
 import com.example.myacronymapplication.data.AlertType
 import com.example.myacronymapplication.view.LongFormMainAdapter
 import com.example.myacronymapplication.viewmodel.AcronymsViewModel
-import com.example.myacronymapplication.viewmodel.AcronymsViewModelFactory
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.Dispatchers
 
 class MainActivity : AppCompatActivity(), AcronymsViewModel.UIUpdates {
 
-    private val myViewModel: AcronymsViewModel by viewModels {
-        AcronymsViewModelFactory(Dispatchers.IO)
-    }
+    private val myViewModel: AcronymsViewModel by viewModels()
     private val databinding: ActivityMainBinding by lazy {
         DataBindingUtil.setContentView(this, R.layout.activity_main) as ActivityMainBinding
     }

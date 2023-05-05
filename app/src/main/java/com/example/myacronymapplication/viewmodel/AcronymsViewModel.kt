@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AcronymsViewModel(private var dispatcher: CoroutineDispatcher) : ViewModel(), Observable {
+class AcronymsViewModel : ViewModel(), Observable {
 
     private var interfaceImplementation: UIUpdates? = null
     @Bindable
@@ -29,7 +29,7 @@ class AcronymsViewModel(private var dispatcher: CoroutineDispatcher) : ViewModel
             viewModelScope.launch {
                 try {
                     // ensure IO is done on the IO thread
-                    val response = withContext(dispatcher) {
+                    val response = withContext(Dispatchers.IO) {
                         NactemRetofit.getService().getFullForm(searchString)
                     }
                     if (response.isNotEmpty())
