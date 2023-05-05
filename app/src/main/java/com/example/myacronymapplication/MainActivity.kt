@@ -42,27 +42,6 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.UIUpdates {
             myLFAdapter.setLFList(it.sortedBy { it.lf?.uppercase() })
         }
 
-        myViewModel.userInput.observeForever {
-            if (BuildConfig.DEBUG)
-                databinding.submitButton.setText(
-                    getString(
-                        R.string.search_string_format,
-                        myViewModel.userInput.value.toString()
-                    )
-                )
-        }
-
-        //this is to just for onscreen keyboard
-//        databinding.inputText.setOnEditorActionListener { _, actionId, _ ->
-//            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                searchResults(myViewModel.userInput.value.toString())
-//                true
-//            } else {
-//                false
-//            }
-//        }
-
-
     }
 
     override fun showAlert(message: String, type: AlertType) {
