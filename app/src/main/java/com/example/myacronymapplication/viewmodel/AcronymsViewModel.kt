@@ -1,5 +1,6 @@
 package com.example.myacronymapplication.viewmodel
 
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
@@ -18,11 +19,9 @@ import java.util.*
 class AcronymsViewModel : ViewModel(), Observable {
 
     private var interfaceImplementation: UIUpdates? = null
-
     @Bindable
     var longFormList: MutableLiveData<List<Lf>> =
         MutableLiveData<List<Lf>>().apply { value = listOf() }
-
     @Bindable
     var userInput = MutableLiveData<String>().apply { value = "" }
 
@@ -30,30 +29,23 @@ class AcronymsViewModel : ViewModel(), Observable {
         if ((userInput.value?.trim()?.length ?: 0) > 0)
             viewModelScope.launch {
                 try {
-                    val response = withTimeoutOrNull(15000) {
-                        withContext(Dispatchers.IO) {
-                            NactemRetofit.getService().getFullForm(searchString)
-                        }
-                    }.let {
-                        if (it?.isNotEmpty() ?: false)
-                            longFormList.value = it?.get(0)?.lfs
-                        else
-                            longFormList.value = listOf()
-                        interfaceImplementation?.showAlert("${longFormList.value?.size ?: 0} items found",AlertType.DEFAULT)
-                    } ?: {
-                        interfaceImplementation?.showAlert("Connection timed Out", AlertType.ERROR)
-                    }
+                    val response = withTimeoutOrNull(1500) { withContext(Dispatchers.IO) {
+                        NactemRetofit.getService().getFullForm(searchString)
+                    }}
+                    longFormList.value = listOf()
+                    response?.let {
+                        if (response.isNotEmpty())
+                            longFormList.value = response[0].lfs
+                        interfaceImplementation?.showAlert("${longFormList.value?.size ?: 0} items found", AlertType.DEFAULT)
+                    } ?: interfaceImplementation?.showAlert("Connection timed out", AlertType.ERROR)
                 } catch (e: Exception) {
                     longFormList.value = listOf()
                     val formattedDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
                         .format(Date(System.currentTimeMillis()))
                     jLog("$searchString : $formattedDate : ${e.toString()}")
-                    interfaceImplementation?.showAlert(
-                        "Exception encountered : $e",
-                        AlertType.ERROR
-                    )
+                    interfaceImplementation?.showAlert("Exception encountered : $e", AlertType.ERROR)
                 }
-            } else {
+        } else {
             interfaceImplementation?.showAlert("Acronym cannot be blank", AlertType.ERROR)
         }
     }
@@ -63,7 +55,7 @@ class AcronymsViewModel : ViewModel(), Observable {
         interfaceImplementation?.hideTheKeyBoard()
     }
 
-    fun onAcronymEditTextAction(actionId: Int): Boolean {
+    fun onAcronymEditTextAction(actionId: Int) : Boolean {
         if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             startSearch()
             return true
@@ -76,7 +68,7 @@ class AcronymsViewModel : ViewModel(), Observable {
     }
 
     interface UIUpdates {
-        fun showAlert(message: String, type: AlertType)
+        fun showAlert(message: String, type : AlertType)
         fun hideTheKeyBoard()
     }
 
