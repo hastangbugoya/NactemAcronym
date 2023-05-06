@@ -28,7 +28,6 @@ class AcronymsViewModel : ViewModel(), Observable {
         if ((userInput.value?.trim()?.length ?: 0) > 0)
             viewModelScope.launch {
                 try {
-                    // ensure IO is done on the IO thread
                     val response = withContext(Dispatchers.IO) {
                         NactemRetofit.getService().getFullForm(searchString)
                     }
@@ -62,9 +61,8 @@ class AcronymsViewModel : ViewModel(), Observable {
         return false
     }
 
-    @JvmName("setToastCallback1")
-    fun setToastCallback(tcb: UIUpdates) {
-        interfaceImplementation = tcb
+    fun setUpdateImplementer(implementer: UIUpdates) {
+        interfaceImplementation = implementer
     }
 
     interface UIUpdates {

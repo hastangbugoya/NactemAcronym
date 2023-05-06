@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(), AcronymsViewModel.UIUpdates {
         val myLFAdapter = LongFormMainAdapter(this)
         databinding.resultRecycler.adapter = myLFAdapter
 
-        myViewModel.setToastCallback(this)
+        myViewModel.setUpdateImplementer(this)
 
         databinding.dbAcronymsModel = myViewModel
 
