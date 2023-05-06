@@ -26,20 +26,18 @@ class AcronymsViewModel : ViewModel(), Observable {
 
     fun getFullForm(searchString: String) {
         if ((userInput.value?.trim()?.length ?: 0) > 0)
-            viewModelScope.launch(Dispatchers.IO) {
+            viewModelScope.launch {
                 try {
-                    val response = async {
+                    val response = withContext(Dispatchers.IO) {
                         NactemRetofit.getService().getFullForm(searchString)
-                    }.await()
-                    if (response.isNotEmpty())
-                        longFormList.postValue(response[0].lfs)
-                    else
-                        longFormList.postValue(listOf())
-                    withContext(Dispatchers.Main) {
-                        interfaceImplementation?.showAlert("${longFormList.value?.size ?: 0} items found", AlertType.DEFAULT)
                     }
+                    if (response.isNotEmpty())
+                        longFormList.value = response[0].lfs
+                    else
+                        longFormList.value = listOf()
+                    interfaceImplementation?.showAlert("${longFormList.value?.size ?: 0} items found", AlertType.DEFAULT)
                 } catch (e: Exception) {
-                    longFormList.postValue(listOf())
+                    longFormList.value = listOf()
                     val formattedDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
                         .format(Date(System.currentTimeMillis()))
                     jLog("$searchString : $formattedDate : ${e.toString()}")
