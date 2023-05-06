@@ -30,7 +30,7 @@ class AcronymsViewModel : ViewModel(), Observable {
         if ((userInput.value?.trim()?.length ?: 0) > 0)
             viewModelScope.launch {
                 try {
-                    val response = withTimeoutOrNull(5000) {
+                    val response = withTimeoutOrNull(15000) {
                         withContext(Dispatchers.IO) {
                             NactemRetofit.getService().getFullForm(searchString)
                         }
