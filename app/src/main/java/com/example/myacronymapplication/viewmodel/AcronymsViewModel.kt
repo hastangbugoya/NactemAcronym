@@ -32,6 +32,7 @@ class AcronymsViewModel : ViewModel(), Observable {
             interfaceImplementation?.showAlert("Acronym cannot be blank", AlertType.ERROR)
             return
         }
+
         longFormList.value = listOf()
         try {
             viewModelScope.launch {
@@ -43,7 +44,6 @@ class AcronymsViewModel : ViewModel(), Observable {
                 response?.let {
                     if (response.isNotEmpty())
                         longFormList.value = response[0].lfs
-
                     interfaceImplementation?.showAlert(
                         "${longFormList.value?.size ?: 0} items found",
                         AlertType.DEFAULT
@@ -53,15 +53,12 @@ class AcronymsViewModel : ViewModel(), Observable {
         } catch (e: Exception) {
             val formattedDate = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
                 .format(Date(System.currentTimeMillis()))
-
             jLog("$searchString : $formattedDate : ${e.toString()}")
-
             interfaceImplementation?.showAlert(
                 "Exception encountered : $e",
                 AlertType.ERROR
             )
         }
-
     }
 
     fun startSearch() {
